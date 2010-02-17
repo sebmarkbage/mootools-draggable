@@ -48,7 +48,12 @@ var cleanUpGhost = function(){
 
 var dispatchDragEvent = function(original, type, target, relatedTarget){
 	return new Event(original.event)
-		.set({ type: type, target: target, relatedTarget: relatedTarget || null })
+		.set({
+			type: type,
+			target: target,
+			relatedTarget: relatedTarget || null,
+			dataTransfer: original.dataTransfer
+		})
 		.dispatch();
 };
 

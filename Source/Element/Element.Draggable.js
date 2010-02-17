@@ -16,10 +16,15 @@ Script: Element.Draggable.js
 	var startEvent = null, gesture = false;
 
 	var shim = useShim && new Element('div', { styles: { width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, zIndex: 9999 } });
-	
+
 	var dispatchDragEvent = function(original, type, target, relatedTarget){
 		var event = new Event(original);
-		event.set({ type: type, target: target || event.target, relatedTarget: relatedTarget || event.relatedTarget });
+		event.set({
+			type: type,
+			target: target || event.target,
+			relatedTarget: relatedTarget || event.relatedTarget,
+			dataTransfer: new DataTransfer(original.dataTransfer, event)
+		});
 		return event.dispatch();
 	};
 
